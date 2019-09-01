@@ -1,0 +1,66 @@
+drop database if exists spmdatabase;
+create schema SPMDatabase;
+use SPMDatabase;
+
+CREATE TABLE course
+( CID VARCHAR(100) NOT NULL,
+  SCHOOL VARCHAR(100) NOT NULL,
+  TITLE VARCHAR(100) NOT NULL,
+  DESCRIPT VARCHAR(1000) NOT NULL,
+  EXAMDATE DATE NOT NULL,
+  EXAMSTART TIME NOT NULL,
+  EXAMEND TIME NOT NULL,
+  CONSTRAINT COURSE_PK PRIMARY KEY (CID) );
+  
+CREATE TABLE section 
+	(CID VARCHAR(100) not null,
+	 SID VARCHAR(100) not null,
+	 DAYOFWK INT not null,
+	 STARTTIME TIME not null,
+	 ENDTIME TIME not null,
+	 INSTRUCTOR   varchar(100)  not null,
+	 VENUE   varchar(100)  not null,
+	 SIZE   INT  not null,
+	CONSTRAINT SECTION_PK PRIMARY KEY (CID, SID),
+	CONSTRAINT SECTION_FK FOREIGN KEY(CID) REFERENCES COURSE(CID));
+
+create table student
+	( USERID VARCHAR(128) not null,
+	PWD VARCHAR(128) not null,
+	SNAME VARCHAR(100) not null,
+	SCHOOL VARCHAR(100) not null,
+	EDOLLAR DECIMAL(6,2) not null,
+    
+	CONSTRAINT USERID_PK PRIMARY KEY (USERID));
+     
+ create table Course_Completed (
+	USERID varchar(100) not null,
+	CID varchar(100) not null,
+
+	constraint Course_Completed_PK primary key (USERID,CID),
+	constraint Course_Completed_FK foreign key (USERID) references Student (USERID),
+	constraint Course_Completed_FK2 foreign key (CID) references Course (CID)
+	);
+ 
+
+
+CREATE TABLE prereq
+( CID VARCHAR(100) NOT NULL,
+  PCID VARCHAR(100) NOT NULL,
+  CONSTRAINT PREREQ_PK PRIMARY KEY (CID, PCID),
+  CONSTRAINT COURSE_FK FOREIGN KEY (CID) REFERENCES course(CID),
+  CONSTRAINT PREREQ_FK FOREIGN KEY (PCID) REFERENCES course(CID)
+  );
+
+CREATE TABLE bid
+	( USERID VARCHAR(100) NOT NULL,
+	CID VARCHAR(100) NOT NULL,
+	SID VARCHAR(100) NOT NULL,
+	AMOUNT DECIMAL(6, 2) NOT NULL,
+    
+	CONSTRAINT BID_PK PRIMARY KEY (USERID, CID, SID),
+	CONSTRAINT BID_FK1 FOREIGN KEY (USERID) REFERENCES student(USERID),
+	CONSTRAINT BID_FK2 FOREIGN KEY (CID, SID) REFERENCES section(CID, SID)
+	);
+
+
