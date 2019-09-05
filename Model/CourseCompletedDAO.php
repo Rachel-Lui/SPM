@@ -34,10 +34,12 @@ class CourseCompletedDAO {
     $stmt->bindParam(':userid', $userid, PDO::PARAM_STR);
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $stmt->execute();
+    $listed = [];
     while($row = $stmt->fetch()) {
-        return new CourseCompleted( $row['USERID'], $row['CID']);
+        $listed[] = new CourseCompleted( $row['USERID'], $row['CID']);
     }
     $stmt->closeCursor();
+    return $listed;
     $conn = null;
   }
 
