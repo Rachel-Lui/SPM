@@ -52,5 +52,37 @@ class Section{
         return $this->SIZE;
     }
 
+    public function setCID($cid){
+        $this->CID = $cid;
+    }
+
+    public function setSID($sid){
+        $this->SID = $sid;
+    }
+
+    public function setDayofwk($dayofwk){
+        $this->DAYOFWK = $dayofwk;
+    }
+
+    public function setStart($start){
+        $this->START = $start;
+    }
+
+    public function setEnd($end){
+        $this->END = $end;
+    }
+
+    public function setInstructor($instructor){
+        $this->INSTRUCTOR = $instructor;
+    }
+
+    public function setVenue($venue){
+        $this->VENUE = $venue;
+    }
+
+    public function setSize($size){
+        $this->SIZE = $size;
+    }
+
 }
 ?>

@@ -32,5 +32,25 @@ class User{
         return $this->e;
     }
 
+    public function setId($id){
+        $this->id = $id;
+    }
+
+    public function setPw($pw){
+        $this->pw = $pw;
+    }
+
+    public function setName($name){
+        $this->name = $name;
+    }
+
+    public function setSchool($school){
+        $this->school = $school;
+    }
+
+    public function setE($e){
+        $this->e = $e;
+    }
+
 }
 ?>

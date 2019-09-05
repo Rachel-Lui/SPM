@@ -16,5 +16,15 @@ class CourseCompleted{
         return $this->cid;
     }
 
+    public function setUserid($userid){
+        $this->userid = $userid;
+    }
+
+    public function setCid($cid){
+        $this->cid = $cid;
+    }
+
+
+
 }
 ?>
