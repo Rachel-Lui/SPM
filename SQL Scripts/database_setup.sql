@@ -37,12 +37,11 @@ create table student
 	USERID varchar(100) not null,
 	CID varchar(100) not null,
 
-	constraint Course_Completed_PK primary key (USERID,CID),
-	constraint Course_Completed_FK foreign key (USERID) references Student (USERID),
-	constraint Course_Completed_FK2 foreign key (CID) references Course (CID)
+	constraint COURSE_COMPLETED_PK primary key (USERID,CID),
+	constraint COURSE_COMPLETED_FK foreign key (USERID) references Student (USERID),
+	constraint COURSE_COMPLETED_FK2 foreign key (CID) references Course (CID)
 	);
  
-
 
 CREATE TABLE prereq
 ( CID VARCHAR(100) NOT NULL,
@@ -63,4 +62,35 @@ CREATE TABLE bid
 	CONSTRAINT BID_FK2 FOREIGN KEY (CID, SID) REFERENCES section(CID, SID)
 	);
 
+CREATE TABLE admin
+	( USERNAME VARCHAR(128) NOT NULL,
+	PWD VARCHAR(128) NOT NULL,
+    
+	CONSTRAINT ADMIN_PK PRIMARY KEY (USERNAME)
+	);
+    
+CREATE TABLE admin_activity
+	( USERNAME VARCHAR(128) NOT NULL,
+	ROUNDNO INT NOT NULL,
+    STARTEND VARCHAR(100) NOT NULL,
+    TIMEDATE VARCHAR(100) NOT NULL,
+    
+	CONSTRAINT ADMIN_ACTIVITY_PK PRIMARY KEY (USERNAME),
+    CONSTRAINT ADMIN_ACTIVITY_FK1 FOREIGN KEY (USERNAME) REFERENCES admin(USERNAME)
+	);    
+    
+CREATE TABLE section_student
+	( USERID VARCHAR(100) NOT NULL,
+	CID VARCHAR(100) NOT NULL,
+	SID VARCHAR(100) NOT NULL,
+	AMOUNT DECIMAL(6, 2) NOT NULL,
+    
+	CONSTRAINT SECTION_STUDENT_PK PRIMARY KEY (USERID, CID, SID),
+	CONSTRAINT SECTION_STUDENT_FK1 FOREIGN KEY (USERID) REFERENCES student(USERID),
+	CONSTRAINT SECTION_STUDENT_FK2 FOREIGN KEY (CID, SID) REFERENCES section(CID, SID)
+	);
+    
+    
+    
+    
 
